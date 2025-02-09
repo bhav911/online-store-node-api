@@ -44,8 +44,8 @@ const fileFilter = (req, file, cb) => {
 app.use(express.json());
 app.use("/images", express.static(path.join(__dirname, "images")));
 
-app.use(helmet())
-app.use(compression())
+app.use(helmet());
+app.use(compression());
 
 app.use(
   multer({ storage: fileStorage, fileFilter: fileFilter }).single("image")
@@ -53,7 +53,7 @@ app.use(
 
 app.use(
   cors({
-    origin: "http://localhost:4200", // This is where your Angular app is running in development
+    origin: "https://online-store-node-api.vercel.app", // This is where your Angular app is running in development
     methods: "GET,POST,PUT,DELETE", // Allow specific HTTP methods
     allowedHeaders: ["Content-Type", "Authorization", "X-CSRF-Token"], // Add your custom headers here
     credentials: true, // Allow cookies to be sent
@@ -68,8 +68,6 @@ app.use((req, res, next) => {
 });
 
 app.post("/store-image", storeImage);
-
-const User = require("./models/user.js");
 
 const errorController = require("./controller/error.js");
 
