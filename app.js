@@ -48,16 +48,16 @@ app.use(helmet());
 app.use(compression());
 
 app.use(
-  multer({ storage: fileStorage, fileFilter: fileFilter }).single("image")
-);
-
-app.use(
   cors({
     origin: "https://online-store-angular.vercel.app", // This is where your Angular app is running in development
     methods: "GET,POST,PUT,DELETE", // Allow specific HTTP methods
     allowedHeaders: ["Content-Type", "Authorization", "X-CSRF-Token"], // Add your custom headers here
     credentials: true, // Allow cookies to be sent
   })
+);
+
+app.use(
+  multer({ storage: fileStorage, fileFilter: fileFilter }).single("image")
 );
 
 app.use((req, res, next) => {
