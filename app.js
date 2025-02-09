@@ -56,18 +56,16 @@ app.use(
   })
 );
 
-app.use(
-  multer({ storage: fileStorage, fileFilter: fileFilter }).single("image")
-);
+app.options("*", cors());
 
-app.use((req, res, next) => {
-  if (req.method === "OPTIONS") {
-    return res.sendStatus(200);
+app.post("/store-image", multer({ storage: fileStorage, fileFilter }).single("image"), (req, res) => {
+  if (!req.file) {
+    return res.status(400).json({ message: "No image provided!" });
   }
-  next();
-});
 
-app.post("/store-image", storeImage);
+  const normalizedPath = "/" + req.file.path.replace(/\\/g, "/");
+  return res.json({ path: normalizedPath });
+});
 
 const errorController = require("./controller/error.js");
 
