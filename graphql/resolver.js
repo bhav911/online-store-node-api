@@ -183,8 +183,8 @@ module.exports = {
         }),
         mode: "payment",
         success_url:
-          "http://localhost:4200/orders/confirmation?session_id={CHECKOUT_SESSION_ID}",
-        cancel_url: "http://localhost:4200/checkout/cancel",
+          "https://online-store-angular.vercel.app/orders/confirmation?session_id={CHECKOUT_SESSION_ID}",
+        cancel_url: "https://online-store-angular.vercel.app/checkout/cancel",
       });
       return {
         products,
