@@ -59,6 +59,7 @@ app.use(
 app.options("*", cors());
 
 app.post("/store-image", multer({ storage: fileStorage, fileFilter }).single("image"), (req, res) => {
+  console.log(req.file);  
   if (!req.file) {
     return res.status(400).json({ message: "No image provided!" });
   }
@@ -92,6 +93,7 @@ app.use("/graphql", (req, res, next) => {
 app.use("/orders/invoice/:orderId", getOrderInvoice);
 
 app.use((error, req, res, next) => {
+  console.log(error);  
   let status = error.statusCode;
   let message = error.message;
   return res.status(status).json({ message });
